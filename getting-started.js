@@ -31,12 +31,12 @@ class GettingStarted extends PolymerElement {
           stroke: currentcolor;
         }
         :host([pressed]) iron-icon {
-          fill: currentcolor;
+          fill: rgba(77, 19, 209, 1);
         }
       </style>
 
       <!-- shadow DOM goes here -->
-      <iron-icon icon="polymer"></iron-icon>
+      <iron-icon icon="[[toggleIcon]]"></iron-icon>
     `;
   }
 
@@ -47,12 +47,25 @@ class GettingStarted extends PolymerElement {
       * A simple property declaration like this one just includes the type (in this case, String).
   */
 
-  static get properties(){
+  static get properties() {
     return {
       toggleIcon: {
         type: String
+      },
+
+      /*
+         Key information:
+         * value specifies the property's default value.
+         * notify tells Polymer to dispatch property change events when the property's value changes. This lets the change be observed by other nodes.
+         * The reflectToAttribute property tells Polymer to update the corresponding attribute when the property changes. This lets you style the element using an attribute selector, like icon-toggle[pressed].
+      */
+      pressed: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        reflectToAttribute: true
       }
-    }
+    };
   }
 
   /*
@@ -61,6 +74,17 @@ class GettingStarted extends PolymerElement {
 
   constructor() {
     super();
+    /*
+    
+       Make sure you are aware of the scope of the this value when referencing this from inside a function that gets passed as an argument, like a callback.
+       In the code above, we have handled scope by binding the this value (this.toggle.bind(this)), but you could alternately handle it by using ES6 arrow functions.
+
+    */
+    this.addEventListener("click", this.toggle.bind(this));
+  }
+
+  toggle() {
+    this.pressed = !this.pressed;
   }
 }
 
