@@ -22,6 +22,22 @@
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles"></style>
+      <!-- Elements must be in the same document scope as the <custom-style> for selectors defined in a <custom-style> to match them.
+           Elements inside another element's shadow DOM are not in main document scope. -->
+      <style>
+        /* Define a document-wide default */
+        html {
+          --icon-toggle-outline-color: rgb(0, 0, 0);
+        }
+        /* Overrides the value specified inside demo/demo-element.js */
+        getting-started {
+          --icon-toggle-pressed-color: rgba(77, 5, 232, 1);
+        }
+        /* This rule does not work! */
+        body {
+          --icon-toggle-color: black;
+        }
+      </style>
     </custom-style>
   </head>
   <body>

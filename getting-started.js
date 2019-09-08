@@ -19,19 +19,30 @@ import "@polymer/iron-icons/iron-icons.js";
     ref. - https://polymer-library.polymer-project.org/3.0/docs/first-element/step-2
  */
 class GettingStarted extends PolymerElement {
+  /*
+      :host is a pseudo-class selector that matches the "host" element of <icon-toggle>s shadow DOM-that is,
+      the <icon-toggle> element itself.
+  */
   static get template() {
+    /*
+      Style an element with custom CSS properties.
+      Key information:
+      * A custom property name must always start with two dashes (--).
+      * Access the value of a custom property with the var function.
+      * You can add a default value, which will be used if the custom property is not defined:
+
+    */
     return html`
       <style>
-        /* shadow DOM styles go here */
         :host {
           display: inline-block;
         }
         iron-icon {
-          fill: rgba(0, 0, 0, 0);
-          stroke: currentcolor;
+          fill: var(--icon-toggle-color, rgba(0, 0, 0, 0));
+          stroke: var(--icon-toggle-outline-color, rgba(0, 0, 0, 0));
         }
         :host([pressed]) iron-icon {
-          fill: rgba(77, 19, 209, 1);
+          fill: var(--icon-toggle-pressed-color, rgba(77, 5, 232, 1));
         }
       </style>
 
